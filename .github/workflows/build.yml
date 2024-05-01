@@ -34,12 +34,13 @@ jobs:
       run: |
         git config --local user.name 'bot'
         git config --local user.email 'riccardo.cavalli@studenti.unipd.it'
-        git remote add board https://github.com/Rikicavaz77/prova_build_docker.git
+        git remote add origin https://github.com/Rikicavaz77/prova_build_docker.git
+        git remote
         ls
         mv build-output Docs
         git add .
         git commit -m "Compile LaTeX files and move PDFs"
-        git push -u board
+        git push -u origin
     
     - name: Publish artifacts
       uses: actions/upload-artifact@v3
