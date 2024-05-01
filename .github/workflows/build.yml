@@ -45,13 +45,13 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: Docs
-        path: /home/runner/work/prova_build_docker_start/Docs
+        path: /home/runner/work/prova_build_docker_start/prova_build_docker_start/Docs
 
     - name: Download Facing Repo
       uses: actions/checkout@v2
       with:
         repository: Rikicavaz77/prova_build_docker
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.UPLOAD_TOKEN }}
 
     - name: Commit changes
       run: |
