@@ -43,6 +43,7 @@ jobs:
     - name: Push changes to another repository
       uses: ad-m/github-push-action@v0.6.0
       with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: main
         repository: Rikicavaz77/prova_build_docker
     
