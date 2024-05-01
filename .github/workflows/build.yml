@@ -28,34 +28,22 @@ jobs:
         cd ${{ github.workspace }}/tools
         docker exec argo-docs-latexpdfbuilder-1 bash -c 'cd /data && chmod +x *.sh && ./compilescript.sh -a'
 
-    - name: Commit and push changes
-      #env:
-        #upload_token: ${{ secrets.UPLOAD_TOKEN }}
+    - name: Add SSH key
       run: |
-        ls
-        mv build-output Docs
-
-    - name: Publish artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: Docs
-        path: Docs
-
-
-
-    - name: Download Facing Repo
-      uses: actions/checkout@v2
-      with:
-        repository: Rikicavaz77/prova_build_docker
-        token: ${{ secrets.UPLOAD_TOKEN }}
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
 
     - name: Commit changes
       run: |
+        ls
         git config user.name github-actions
         git config user.email riccardo.cavalli@studenti.unipd.it
         git add .
         git commit -m "[BOT] Aggiornamento documentazione"
-        git push
+        git remote add board git@github.com:Rikicavaz77/prova_build_docker.git
+        git push board
             
     - name: Stop Docker Compose
       run: |
