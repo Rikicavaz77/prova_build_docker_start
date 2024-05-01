@@ -32,15 +32,19 @@ jobs:
       #env:
         #upload_token: ${{ secrets.UPLOAD_TOKEN }}
       run: |
-        git config --local user.name 'bot'
-        git config --local user.email 'riccardo.cavalli@studenti.unipd.it'
-        git remote add origin https://github.com/Rikicavaz77/prova_build_docker.git
+        git config --global user.email 'riccardo.cavalli@studenti.unipd.it'
+        git config --global user.name 'bot'
         git remote
         ls
         mv build-output Docs
         git add .
         git commit -m "Compile LaTeX files and move PDFs"
-        git push -u origin
+
+    - name: Push changes to another repository
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        branch: main
+        repository: Rikicavaz77/prova_build_docker
     
     - name: Publish artifacts
       uses: actions/upload-artifact@v3
