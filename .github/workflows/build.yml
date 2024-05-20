@@ -16,7 +16,7 @@ jobs:
     - name: Upload combined artifact
       uses: actions/upload-artifact@v4
       with:
-        name: combined-artifact
+        name: combined-artifact/combined-artifact
         path: |
           Logo
           tools
