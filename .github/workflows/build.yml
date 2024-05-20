@@ -5,41 +5,18 @@ on:
     branches:
       - main
       
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
-    - name: Start containers
-      run: |
-        cd ${{ github.workspace }}/tools
-        docker compose up -d 
-
-    - name: Compile documents
-      run: |
-        cd ${{ github.workspace }}/tools
-        docker exec argo-docs-latexpdfbuilder-1 bash -c 'cd /data && chmod +x *.sh && ./compilescript.sh -a'
-      
-    - name: Commit changes
-      run: |
-        ls
-        git config user.name github-actions
-        git config user.email riccardo.cavalli@studenti.unipd.it
-        git config --unset-all http.https://github.com/.extraheader
-        git add .
-        git commit -m "[BOT] Aggiornamento documentazione"
-        git remote add board git@github.com:Rikicavaz77/prova_build_docker.git
-        git push board
-            
-    - name: Stop Docker Compose
-      run: |
-        cd ${{ github.workspace }}/tools
-        docker compose stop
+    - name: Upload combined artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: combined-artifact
+        path: |
+          Logo
+          tools
