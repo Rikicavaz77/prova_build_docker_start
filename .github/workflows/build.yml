@@ -13,10 +13,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Parent Folder
+      continue-on-error: true
+      run: |
+        mv mkdir -p ChatSQL
+        cp -r Logo ChatSQL
+        cp -r tools ChatSQL
+
     - name: Upload combined artifact
       uses: actions/upload-artifact@v4
       with:
-        name: combined-artifact/combined-artifact
-        path: |
-          Logo
-          tools
+        name: combined-artifact
+        path: ChatSQL
