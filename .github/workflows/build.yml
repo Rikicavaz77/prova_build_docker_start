@@ -16,7 +16,7 @@ jobs:
     - name: Parent Folder
       continue-on-error: true
       run: |
-        mkdir -p ChatSQL
+        mkdir -p ChatSQL/PoC
         cp -r Logo ChatSQL
         cp -r tools ChatSQL
 
@@ -24,4 +24,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: combined-artifact
-        path: ChatSQL/
+        path: ChatSQL
