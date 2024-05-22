@@ -17,8 +17,8 @@ jobs:
       continue-on-error: true
       run: |
         mkdir -p ChatSQL/PoC
-        cp -r Logo ChatSQL
-        cp -r tools ChatSQL
+        cp -r Logo ChatSQL/PoC
+        cp -r tools ChatSQL/PoC
 
     - name: Upload combined artifact
       uses: actions/upload-artifact@v4
