@@ -16,7 +16,7 @@ jobs:
     - name: Parent Folder
       continue-on-error: true
       run: |
-        mv mkdir -p ChatSQL
+        mkdir -p ChatSQL
         cp -r Logo ChatSQL
         cp -r tools ChatSQL
 
